@@ -15,7 +15,11 @@ addons:
 language: rust
 
 # Cache cargo symbols for faster build
-cache: cargo
+cache:
+  directories:
+    - /home/travis/.cargo/
+    - /usr/local/include/
+    - /usr/local/lib/
 
 env:
   - RUST_BACKTRACE=1
