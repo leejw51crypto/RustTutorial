@@ -14,7 +14,7 @@ impl Food for Apple {
     }
 }
 
-#[derive(Default,Debug)]
+#[derive(Default, Debug)]
 struct Ramen {}
 impl Food for Ramen {
     fn eat(&self) {
@@ -28,20 +28,18 @@ struct Program {
 }
 //Shared references in Rust disallow mutation by default, and Rc is no exception
 impl Program {
-   
-   pub fn show(&mut self) {
-       if self.node.is_some() {
-           self.node.as_ref().unwrap().eat();
-       }
-
-   }
+    pub fn show(&mut self) {
+        if self.node.is_some() {
+            self.node.as_ref().unwrap().eat();
+        }
+    }
 }
 fn main() {
     let mut a: Program = Program::default();
-    a.node= Some(Box::new(Apple::default()));
+    a.node = Some(Box::new(Apple::default()));
     a.show();
 
- a.node= Some(Box::new(Ramen::default()));
+    a.node = Some(Box::new(Ramen::default()));
     a.show();
 
     println!("ok");
