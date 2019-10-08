@@ -1,4 +1,17 @@
 sudo: required
+
+addons:
+  apt:   
+    packages:
+      - libssl-dev
+      - libcurl4-openssl-dev
+      - libelf-dev
+      - libdw-dev
+      - cmake
+      - gcc
+      - binutils-dev
+      - libc6-dev
+
 language: rust
 
 # Cache cargo symbols for faster build
@@ -9,17 +22,20 @@ cache: cargo
     - /usr/local/lib/
 
 
-# Dependencies of kcov, used by coverage
-addons:
-  apt:
-    packages:
-      - libcurl4-openssl-dev
-      - libelf-dev
-      - libdw-dev
-      - binutils-dev
-      - cmake # also required for cargo-update
-    sources:
-      - kalakris-cmake
+env:
+  - RUST_BACKTRACE=1
+  - RUSTFLAGS=-Ctarget-feature=+aes,+ssse3
+  - PATH=$HOME/.local/bin:$PATH
+  - LD_LIBRARY_PATH=$HOME/lib
+  - PKG_CONFIG_PATH=$HOME/lib/pkgconfig
+before_install: # versions from https://github.com/erickt/rust-zmq/blob/master/.travis.yml
+  - wget https://github.com/jedisct1/libsodium/releases/download/1.0.16/libsodium-1.0.16.tar.gz
+  - tar xvfz libsodium-1.0.16.tar.gz
+  - cd libsodium-1.0.16 && ./configure --prefix=$HOME && make && make install && cd ..
+  - wget https://github.com/zeromq/libzmq/releases/download/v4.2.5/zeromq-4.2.5.tar.gz
+  - tar xvfz zeromq-4.2.5.tar.gz
+  - cd zeromq-4.2.5 && ./configure --prefix=$HOME --with-libsodium && make && make install && cd ..
+
 
 before_script:
   - export PATH=$HOME/.cargo/bin:$PATH
