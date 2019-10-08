@@ -1,7 +1,7 @@
 sudo: required
 
 addons:
-  apt:   
+  apt:
     packages:
       - libssl-dev
       - libcurl4-openssl-dev
@@ -15,12 +15,11 @@ addons:
 language: rust
 
 # Cache cargo symbols for faster build
-cache: cargo
+cache:
   directories:
     - /home/travis/.cargo/
     - /usr/local/include/
     - /usr/local/lib/
-
 
 env:
   - RUST_BACKTRACE=1
@@ -36,11 +35,10 @@ before_install: # versions from https://github.com/erickt/rust-zmq/blob/master/.
   - tar xvfz zeromq-4.2.5.tar.gz
   - cd zeromq-4.2.5 && ./configure --prefix=$HOME --with-libsodium && make && make install && cd ..
 
-
 before_script:
   - export PATH=$HOME/.cargo/bin:$PATH
   - cd code
 
 script:
-#  - cargo build --verbose --all
+  #  - cargo build --verbose --all
   - echo "OK"
