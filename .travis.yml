@@ -9,6 +9,11 @@ addons:
     packages:
       - libssl-dev
 
+cache: cargo
+
+before_cache:
+  - rm -rf "$TRAVIS_HOME/.cargo/registry/src"
+
 before_script:
   - export PATH=$TRAVIS_HOME/.cargo/bin:$PATH
   - cd code
