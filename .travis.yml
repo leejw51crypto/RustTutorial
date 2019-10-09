@@ -9,11 +9,26 @@ addons:
     packages:
       - libssl-dev
 
-cache: cargo
+cache:
+  directories:
+    - /home/travis/.cache/sccache
+    - /home/travis/.cargo
+    - /home/travis/.rustup
+    - target
+before_cache:
+  - rm -rf /home/travis/.cargo/registry/src
 
 before_script:
   - export PATH=$TRAVIS_HOME/.cargo/bin:$PATH
   - cd code
+
+env:
+  - RUST_BACKTRACE=1
+  - RUSTFLAGS=-Ctarget-feature=+aes,+ssse3
+  - PATH=$HOME/.local/bin:$PATH
+  - LD_LIBRARY_PATH=/home/travis/lib
+  - LIBRARY_PATH=/home/travis/lib
+  - PKG_CONFIG_PATH=/home/travis/lib/pkgconfig
 
 script:
   - cargo build
