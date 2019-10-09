@@ -8,24 +8,8 @@ addons:
   apt:
     packages:
       - libssl-dev
-      - libcurl4-openssl-dev
-      - libelf-dev
-      - libdw-dev
-      - cmake
-      - gcc
-      - binutils-dev
-      - libc6-dev
 
-# Cache cargo symbols for faster build
 cache: cargo
-
-env:
-  - RUST_BACKTRACE=1
-  - RUSTFLAGS=-Ctarget-feature=+aes,+ssse3
-  - PATH=$TRAVIS_HOME/.local/bin:$PATH
-  - LD_LIBRARY_PATH=$TRAVIS_HOME/lib
-  - LIBRARY_PATH=$TRAVIS_HOME/lib
-  - PKG_CONFIG_PATH=$TRAVIS_HOME/lib/pkgconfig
 
 before_script:
   - export PATH=$TRAVIS_HOME/.cargo/bin:$PATH
@@ -34,3 +18,4 @@ before_script:
 script:
   - cargo build
   - echo "OK"
+  - echo $TRAVIS_HOME
