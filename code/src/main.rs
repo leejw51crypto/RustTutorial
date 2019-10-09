@@ -8,6 +8,7 @@ trait Food {
 struct Apple {
     label: i32,
 }
+
 impl Food for Apple {
     fn eat(&self) {
         println!("eat apple {}", self.label);
