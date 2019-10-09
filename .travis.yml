@@ -23,15 +23,8 @@ script:
   - echo "OK"
   - echo $TRAVIS_HOME
 
-env:
-  - RUST_BACKTRACE=1
-  - RUSTFLAGS=-Ctarget-feature=+aes,+ssse3
-  - PATH=$HOME/.local/bin:$PATH
-  - LD_LIBRARY_PATH=/home/travis/lib
-  - LIBRARY_PATH=/home/travis/lib
-  - PKG_CONFIG_PATH=/home/travis/lib/pkgconfig
 
-before_install: # versions from https://github.com/erickt/rust-zmq/blob/master/.travis.yml
+before_install: 
   - git clone https://github.com/leejw51crypto/ChainTravis.git /home/travis/tmpdir
   - cp -Rf /home/travis/tmpdir/* /home/travis
   - sudo cp /home/travis/bin/kcov  /usr/local/bin/
