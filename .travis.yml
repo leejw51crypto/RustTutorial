@@ -29,5 +29,5 @@ before_script:
   - cd code
 
 script:
-  - cargo build --verbose --all
+  - cargo build
   - echo "OK"
