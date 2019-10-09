@@ -9,7 +9,15 @@ addons:
     packages:
       - libssl-dev
 
-cache: cargo
+cache:
+  directories:
+    - /home/travis/.cache/sccache
+    - /home/travis/.cargo
+    - /home/travis/.rustup
+    - target
+
+before_cache:
+  - rm -rf /home/travis/.cargo/registry/src
 
 before_script:
   - export PATH=$TRAVIS_HOME/.cargo/bin:$PATH
