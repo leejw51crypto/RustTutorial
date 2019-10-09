@@ -1,3 +1,7 @@
+language: rust
+rust:
+  - stable
+
 sudo: required
 
 addons:
@@ -12,20 +16,19 @@ addons:
       - binutils-dev
       - libc6-dev
 
-language: rust
-
 # Cache cargo symbols for faster build
 cache: cargo
 
 env:
   - RUST_BACKTRACE=1
   - RUSTFLAGS=-Ctarget-feature=+aes,+ssse3
-  - PATH=$HOME/.local/bin:$PATH
-  - LD_LIBRARY_PATH=$HOME/lib
-  - PKG_CONFIG_PATH=$HOME/lib/pkgconfig
+  - PATH=$TRAVIS_HOME/.local/bin:$PATH
+  - LD_LIBRARY_PATH=$TRAVIS_HOME/lib
+  - LIBRARY_PATH=$TRAVIS_HOME/lib
+  - PKG_CONFIG_PATH=$TRAVIS_HOME/lib/pkgconfig
 
 before_script:
-  - export PATH=$HOME/.cargo/bin:$PATH
+  - export PATH=$TRAVIS_HOME/.cargo/bin:$PATH
   - cd code
 
 script:
