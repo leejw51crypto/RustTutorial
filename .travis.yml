@@ -22,3 +22,9 @@ script:
   - cargo build
   - echo "OK"
   - echo $TRAVIS_HOME
+
+after_success: 
+  - |
+    echo "build ok, after_success"
+  
+ 
